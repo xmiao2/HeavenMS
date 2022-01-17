@@ -1,4 +1,15 @@
-﻿<img src="https://heavenmssurveyhome.files.wordpress.com/2018/12/heavenmslogo.png"  width="370" height="auto">
+I tried to follow [this video](https://www.youtube.com/watch?v=DeJwVy6xSg8) to setup it up, and I ran into some gotchas:
+
+1. On windows 10, you'll need to run XAMPP with administrator mode or apache wouldn't start.
+2. To get phpMyAdmin to work, you'll need to go to <xampp install directory>/php/php.ini and uncomment the "openssl" and "mysqli" extensions by removing the ";" before the extensions. E.g. ";extension=mysqli" > "extension=mysqli". Otherwise, you'll see this error "Your Composer dependencies require the following PHP extensions to be installed: mysqli, openssl"
+3. If you are still running into the above error, and you've confirmed that you've uncommented the extensions in php.ini, it might be because you have installed XAMPP in a directory with a space, e.g. "C:\Program Files". If so, go to php.ini > include_path, wrap C:\Program Files\...\php\PEAR with double quotes.
+4. db_shopupdate.sql insert doesn't work until I've started the server at least once, otherwise it says a table is missing
+5. You'll need to modify install.bat to change the jdk directory (currently it's hardcoded at 8u211)
+6. You may need to explicitly specify the classpath to your install.bat or your may run into net.server.Server classNotFound issue. (I used Intellij instead of NetBean so it might not be an issue otherwise). Here is what works for me: "java -Xmx2048m -Dwzpath=wz\ -cp <path_to_your_output>\production\HeavenMS-rev398;<path_to_your_git_download>\HeavenMS-rev398\cores\* net.server.Server"
+	
+(Youtube keeps deleting my comment, and I don't know where else to safely put this information, hence forking this repo)
+
+<img src="https://heavenmssurveyhome.files.wordpress.com/2018/12/heavenmslogo.png"  width="370" height="auto">
 
 ## Head developer: Ronan C. P. Lana
 
